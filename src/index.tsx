@@ -1,78 +1,51 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { combineReducers, createStore, Reducer} from 'redux';
+import {Provider} from 'react-redux';
+import {combineReducers, createStore, Reducer} from 'redux';
 
-import { debounce } from 'lodash';
+import * as TogglableList from './TogglableList';
+import * as AddItem from './AddItem';
 
-import Search  from './components/search';
+export type IGlobalState = TogglableList.IState;
+type IGlobalActions = TogglableList.IActions | AddItem.IActions;
 
-
-function nameIsAvaliable(name: string): boolean {
-  window.console.log('asdf');
-  return Math.random() > 0.5;
-}
-
-interface ISearchAction {
-  readonly type: 'SEARCH';
-  readonly name: string;
-}
-
-type Actions = ISearchAction;
-
-// connect(state => ({}), dispatch => ({
-//   onChange(e) {
-//     dispatch(search())
-//     dispatch(searchActionCreator(e.target.value))
-//   }
-// }))(Comp)
-
-
-function search() {
-  return ({type: 'SEARCH'})
-};
-
-// function searchActionCreator(query) {
-//   return new Promise(resolve=> {
-//     apiCall(query, (err, result) => {
-//       if (err) {
-//         throw ({type: 'FAILURE'});
-//       }
-
-//       resolve({type: 'SUCCESS'});
-//     })
-//   });
-// }
-
-
-// function newSearch(event: string) {
-//   window.console.log(`event: ${ event }`);
-// }
-
-// function available(state: boolean = false) {
-//   return state;
-// }
-
-
-function searchBar(state: boolean = false, action: Actions) {
+function reducer(
+  state: IGlobalState = {
+    list: [],
+    nextItemID: 0,
+  },
+  action: IGlobalActions,
+) {
   switch (action.type) {
-    case 'SEARCH':
-      return nameIsAvaliable(action.name)
-    default: 
+    case 'TOGGLE_LIST_ITEM':
+      return {
+        ...state,
+        list: state.list.map(
+          i =>
+            i.ID === action.itemID
+              ? {
+                  done: !i.done,
+                  text: i.text,
+                  ID: i.ID,
+                }
+              : i,
+        ),
+      };
+    case 'ADD_LIST_ITEM':
+      return {
+        list: [
+          ...state.list,
+          {
+            ID: state.nextItemID,
+            done: false,
+            text: action.text,
+          },
+        ],
+        nextItemID: state.nextItemID + 1,
+      };
+    default:
       return state;
   }
-}
-
-// Typing is broken, fixed in redux 4.0.
-// https://github.com/reactjs/redux/issues/2709
-// @ts-ignore
-const searchPage = combineReducers({
-  searchBar
-});
-
-
-interface IState {
-  readonly searchBar: boolean;
 }
 
 window.addEventListener('load', () => {
@@ -80,9 +53,12 @@ window.addEventListener('load', () => {
     // Typing is broken, fixed in redux 4.0.
     // https://github.com/reactjs/redux/issues/2709
     // @ts-ignore
-    <Provider store={createStore(searchPage)}>
-      <Search />
+    <Provider store={createStore(reducer)}>
+      <>
+        <AddItem.Component />
+        <TogglableList.Component />
+      </>
     </Provider>,
-    document.getElementById('root')
+    document.getElementById('root'),
   );
 });
