@@ -1,0 +1,30 @@
+{
+  "name": "react-redux-typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/maxwellburson/react-redux-typescript.git",
+  "license": "MIT",
+  "dependencies": {
+    "@types/jest": "^22.1.2",
+    "@types/lodash": "^4.14.102",
+    "@types/react": "^16.0.38",
+    "@types/react-dom": "^16.0.4",
+    "@types/react-redux": "^5.0.15",
+    "@types/redux": "^3.6.0",
+    "jest": "^22.2.2",
+    "lodash": "^4.17.5",
+    "parcel-bundler": "^1.5.1",
+    "prettier": "^1.10.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "ts-jest": "^22.0.4",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.7.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "tslint-immutable": "^4.5.1",
+    "tslint-react": "^3.5.0",
+    "typescript": "^2.7.1"
+  }
+}

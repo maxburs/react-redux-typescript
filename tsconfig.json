@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "downlevelIteration": true,
+    "diagnostics": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "module": "commonjs",
+    "noErrorTruncation": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noFallthroughCasesInSwitch": true,
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "strict": true,
+    "target": "es2015"
+  },
+  "include": ["packages/**/*"]
+}
