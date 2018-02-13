@@ -23,7 +23,7 @@ const AddItem: React.SFC<IProps> = ({
       <input type='text' ref={r => (textBox = r)}/>
       <button onClick={onClick} >add</button>
     </div>
-  )
+  );
 };
 
 export interface IActions {
@@ -42,4 +42,3 @@ export const Component = connect(
     }
   })
 )(AddItem);
-

@@ -22,11 +22,11 @@ const ToggableList: React.SFC<IProps> = ({
   setItemState,
 }: IProps) => (
   <ul>
-    {list.map(i => (
+    {list.map(v => (
       <TogglableItem
-        key={i.ID}
-        {...i}
-        onClick={() => setItemState(i.ID, !i.done)}
+        key={v.ID}
+        {...v}
+        onClick={() => setItemState(v.ID, !v.done)}
       />
     ))}
   </ul>

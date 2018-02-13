@@ -16,6 +16,7 @@ function reducer(
   },
   action: IGlobalActions,
 ) {
+  window.console.log(action);
   switch (action.type) {
     case 'TOGGLE_LIST_ITEM':
       return {
